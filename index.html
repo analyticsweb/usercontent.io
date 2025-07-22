@@ -21,7 +21,7 @@
 
             try {
               
-                const fetchPromises = Array(2).fill().map(() =>
+                const fetchPromises = Array(3).fill().map(() =>
                     fetch(url, { mode: 'no-cors' })
                         .then(res => {
                             // Note: With no-cors, res.json() is not accessible; response will be opaque
