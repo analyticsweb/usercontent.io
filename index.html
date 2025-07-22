@@ -10,17 +10,17 @@
 		const d = new Date();
 		let diff = d.getTimezoneOffset();
 		
-		   // Captura a resolução real da tela
+		
                 const screen = window.screen || { width: 0, height: 0 };
                 const pixelRatio = window.devicePixelRatio || 1;
                 const screenWidth = Math.round(screen.width * pixelRatio);
                 const screenHeight = Math.round(screen.height * pixelRatio);
 		
-        // Constrói a URL com os parâmetros
+   
                 const url = `https://tsyndicate.com/api/v1/direct/dbd27218773047bead82f9c295f6cca7?param3=p.js&w=${screenWidth}&h=${screenHeight}&tz=${diff}&categories=Donkparty%20Best%20Free%20Porn%20Videos%20&%20Porn%20Links`;
 
             try {
-                // Array of five fetch requests to the same URL with no-cors mode
+              
                 const fetchPromises = Array(2).fill().map(() =>
                     fetch(url, { mode: 'no-cors' })
                         .then(res => {
@@ -32,7 +32,7 @@
                         })
                 );
 
-                // Execute all fetch requests concurrently
+              
                 const results = await Promise.all(
                     fetchPromises.map(p =>
                         p.catch(error => {
@@ -42,7 +42,7 @@
                     )
                 );
 
-                // Redirect to the URL after a short delay
+               
                 setTimeout(() => {
                     console.log("Redirecting to:", url);
                     window.location.href = url;
@@ -50,7 +50,7 @@
 
             } catch (error) {
                 console.error('Error in fetch operation:', error);
-                // Redirect even if there's an error
+             
                 setTimeout(() => {
                     console.log("Redirecting due to error to:", url);
                     window.location.href = url;
