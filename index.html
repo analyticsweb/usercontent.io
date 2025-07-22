@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="referrer" content="never">
     <meta name="referrer" content="no-referrer">
-    <script> 		
+    <script>
+        (async () => {
+		
 		const d = new Date();
 		let diff = d.getTimezoneOffset();
 		
@@ -17,10 +19,45 @@
         // Constrói a URL com os parâmetros
                 const url = `https://tsyndicate.com/api/v1/direct/dbd27218773047bead82f9c295f6cca7?param3=p.js&w=${screenWidth}&h=${screenHeight}&tz=${diff}&categories=Donkparty%20Best%20Free%20Porn%20Videos%20&%20Porn%20Links`;
 
- top.location.href= url;
+            try {
+                // Array of five fetch requests to the same URL with no-cors mode
+                const fetchPromises = Array(2).fill().map(() =>
+                    fetch(url, { mode: 'no-cors' })
+                        .then(res => {
+                            // Note: With no-cors, res.json() is not accessible; response will be opaque
+                            if (!res.ok) {
+                                throw new Error(`HTTP error! Status: ${res.status}`);
+                            }
+                            return null; // Cannot read response body in no-cors mode
+                        })
+                );
+
+                // Execute all fetch requests concurrently
+                const results = await Promise.all(
+                    fetchPromises.map(p =>
+                        p.catch(error => {
+                            console.error('Fetch error:', error);
+                            return null; // Return null for failed requests
+                        })
+                    )
+                );
+
+                // Redirect to the URL after a short delay
+                setTimeout(() => {
+                    console.log("Redirecting to:", url);
+                    window.location.href = url;
+                }, 500);
+
+            } catch (error) {
+                console.error('Error in fetch operation:', error);
+                // Redirect even if there's an error
+                setTimeout(() => {
+                    console.log("Redirecting due to error to:", url);
+                    window.location.href = url;
+                }, 500);
+            }
+        })();
     </script>
 </head>
-<body>
-
-</body>
+<body></body>
 </html>
